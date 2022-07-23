@@ -33,7 +33,7 @@ button {
   box-shadow: rgba(0, 0, 0, 0.11);
   border: none;
   background: #ffffff;
-  border-radius: 3rem;
+  border-radius: .3rem;
   height: 3rem;
   width: 100%;
   outline: none;
@@ -41,6 +41,7 @@ button {
   padding: 0 3rem;
   font-size: 1rem;
 }
+
 @media (min-width: 1100px) {
   .input,
   .password-input,
@@ -78,6 +79,7 @@ button {
   top: -3%;
   right: -2%;
 }
+
 .editIcon {
   cursor: pointer;
   position: absolute;
@@ -125,6 +127,7 @@ button {
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -180,6 +183,7 @@ button {
   font-weight: 600;
   color: #8f8f8f;
 }
+
 .navbarListItemNameActive {
   color: #2c2c2c;
 }
@@ -196,6 +200,25 @@ button {
 
 .password-input-div {
   position: relative;
+}
+
+.password-toggler {
+  width: 56px;
+  height: 43px;
+  position: absolute;
+  bottom: 2.2rem;
+  right: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: right;
+  color: #586283;
+  font-weight: 400;
 }
 
 .password-input {
@@ -218,44 +241,26 @@ button {
   text-align: right;
 }
 
-.signin-bar,
-.signup-bar {
-  margin-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: inherit;
+.form-header {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
 }
 
-.signin-btn,
-.signup-btn,
-.signin-text,
-.signup-text {
-  cursor: pointer;
-}
-@media (min-width: 1024px) {
-  .signin-bar,
-  .signup-bar {
-    justify-content: start;
-  }
-}
-
-.signin-text,
-.signup-text {
+.form-header > span {
+  font-weight: 600;
   font-size: 1.5rem;
-  font-weight: 700;
 }
 
-.signin-btn,
-.signup-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 3rem;
-  background-color: #00cc66;
-  border-radius: 50%;
+.form-header > small {
+  color: gray
 }
+
+input:focus, input:hover {
+  transition: all 1s ease-in-out;
+  border: 1px solid #00cc66;
+}
+
+
 @media (min-width: 1024px) {
   .signin-btn,
   .signup-btn {
@@ -301,6 +306,7 @@ button {
     margin-bottom: 10rem;
   }
 }
+
 @media (max-height: 536) {
   .explore {
     margin-bottom: 10rem;
@@ -347,6 +353,7 @@ button {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 0.5rem;
 }
+
 @media (min-width: 1024px) {
   .swiper-slide-text {
     font-size: 1.75rem;
@@ -364,6 +371,7 @@ button {
   padding: 0.25rem 0.5rem;
   border-radius: 1rem;
 }
+
 @media (min-width: 1024px) {
   .swiperSlidePrice {
     font-size: 1.25rem;
