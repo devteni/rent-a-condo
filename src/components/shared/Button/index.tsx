@@ -9,9 +9,9 @@ type Props = {
 
 const Button: React.FC<Props> = ({ children, className, style}) => {
   return (
-    <div className={`button ${className ?? ''}`} style={{...style}}>
+    <button className={`button ${className ?? ''}`} style={{...style}}>
         {children}
-    </div>
+    </button>
   )
 }
 

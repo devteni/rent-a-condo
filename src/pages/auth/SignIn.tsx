@@ -1,8 +1,11 @@
 import React, { useRef, useState } from 'react';
-import Card from '../../components/shared/Card/';
 import { Link, useNavigate } from 'react-router-dom';
-import "./auth.css"
+import { toast } from 'react-toastify';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../services/firebase';
+import Card from '../../components/shared/Card/';
 import Button from '../../components/shared/Button';
+import "./auth.css"
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +23,21 @@ function SignIn() {
     }))
   }
 
+  const handleSubmit = async (e: React.FormEvent ) => {
+    try {
+      e.preventDefault();
+
+      const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+  
+      if (userCredential.user) {
+        navigate('/');
+      }
+
+    } catch(error) {
+      toast.error('Bad User Credentials');
+    }
+  }
+
   return (
     <>
       <Card className='auth'>
@@ -29,7 +47,7 @@ function SignIn() {
              <small>Sign in to your account to continue</small>
           </section>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               type='email' 
               className='email-input'

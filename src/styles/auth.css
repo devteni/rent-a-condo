@@ -19,6 +19,7 @@
   text-align: center;
   cursor: pointer;
   background-color: #00cc66;
+  min-width: 100%;
 }
 
 .signin-btn,

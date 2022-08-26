@@ -1,12 +1,11 @@
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { 
-  getAuth, 
-  createUserWithEmailAndPassword, 
-  updateProfile } from 'firebase/auth';
-import { db } from '../../firebase.config';
+import { auth, db } from '../../services/firebase';
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import Button from '../../components/shared/Button';
 import Card from '../../components/shared/Card';
+import { toast } from 'react-toastify';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,6 +24,34 @@ function SignUp() {
     }))
   }
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+
+      const user = userCredential.user;
+      
+      updateProfile(auth.currentUser!, {
+        displayName: formData.name
+      });
+
+      // Remove password from form data and add a timestamp to the object
+      let formDataCopy = { ...formData };
+      const { password, ...rest} = formDataCopy;
+      let data = { timestamp: serverTimestamp(), ...rest };
+      
+      // Add user to db
+      await setDoc(doc(db, 'users', user.uid), data);
+
+      navigate('/');
+
+    } catch(error) {
+      toast.error('Something went wrong')
+    }
+  }
+
   return (
     <>
       <Card className='auth'>
@@ -34,7 +61,7 @@ function SignUp() {
               <small>Sign in to your account to continue</small>
           </section>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
             type='text' 
             className='name-input'
