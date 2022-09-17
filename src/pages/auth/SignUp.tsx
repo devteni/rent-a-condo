@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth, db } from '../../services/firebase';
+import { auth, db } from '../../lib/firebase';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import Button from '../../components/shared/Button';
 import Card from '../../components/shared/Card';
 import { toast } from 'react-toastify';
+import FormInput from '../../components/shared/FormInput';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +21,7 @@ function SignUp() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
-      ...prevState, [e.target.id]: e.target.value
+      ...prevState, [e.target.name]: e.target.value
     }))
   }
 
@@ -62,29 +63,29 @@ function SignUp() {
           </section>
 
           <form onSubmit={handleSubmit}>
-            <input
-            type='text' 
-            className='name-input'
-            placeholder='Name'
-            id='name'
-            value={formData.name}
-            onChange={(e) => handleChange(e)}
+            <FormInput
+              type='text' 
+              className='name-input'
+              placeholder='Name'
+              name='name'
+              value={formData.name}
+              onChange={(e) => handleChange(e)}
               />
 
-            <input
+            <FormInput
               type='email' 
               className='email-input'
               placeholder='Email'
-              id='email'
+              name='email'
               value={formData.email}
               onChange={(e) => handleChange(e)}
               />
             
             <div className="password-input-div">
-              <input type={showPassword ? 'text' : 'password' }
+              <FormInput type={showPassword ? 'text' : 'password' }
                 className='password-input'
                 placeholder='Password' 
-                id='password'
+                name='password'
                 value={formData.password}
                 onChange={(e) => handleChange(e)}
               />

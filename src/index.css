@@ -257,12 +257,6 @@ button {
   color: gray
 }
 
-input:focus, input:hover {
-  transition: all .5s ease-in-out;
-  border: 1px solid #00cc66;
-}
-
-
 @media (min-width: 1024px) {
   .signin-btn,
   .signup-btn {
@@ -636,8 +630,8 @@ input:focus, input:hover {
   font-weight: 600;
   color: #ffffff;
   background-color: #00cc66;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: .5rem;
 }
 
 .profileDetailsHeader {

@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../services/firebase';
+import { auth } from '../../lib/firebase';
 import Card from '../../components/shared/Card/';
 import Button from '../../components/shared/Button';
 import "../../styles/auth.css"
+import FormInput from '../../components/shared/FormInput';
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +20,7 @@ function SignIn() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
-      ...prevState, [e.target.id]: e.target.value
+      ...prevState, [e.target.name]: e.target.value
     }))
   }
 
@@ -48,20 +49,20 @@ function SignIn() {
           </section>
 
           <form onSubmit={handleSubmit}>
-            <input
+            <FormInput
               type='email' 
+              name='email'
               className='email-input'
               placeholder='Email'
-              id='email'
               value={formData.email}
               onChange={(e) => handleChange(e)}
               />
             
             <div className="password-input-div">
-              <input type={showPassword ? 'text' : 'password' }
+              <FormInput type={showPassword ? 'text' : 'password' }
                 className='password-input'
+                name='password'
                 placeholder='Password' 
-                id='password'
                 value={formData.password}
                 onChange={(e) => handleChange(e)}
               />
