@@ -49,6 +49,8 @@ button {
   .name-input,
   .textarea {
     padding: 0 5rem;
+    border: none;
+    outline: none;
   }
 }
 
@@ -256,7 +258,7 @@ button {
 }
 
 input:focus, input:hover {
-  transition: all 1s ease-in-out;
+  transition: all .5s ease-in-out;
   border: 1px solid #00cc66;
 }
 

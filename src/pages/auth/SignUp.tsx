@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth, db } from '../../services/firebase';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import Button from '../../components/shared/Button';

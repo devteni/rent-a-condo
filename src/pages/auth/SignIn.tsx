@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../services/firebase';
 import Card from '../../components/shared/Card/';
 import Button from '../../components/shared/Button';
-import "./auth.css"
+import "../../styles/auth.css"
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
