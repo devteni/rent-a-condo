@@ -5,8 +5,9 @@ import { updateProfile } from 'firebase/auth';
 import { updateDoc, doc } from 'firebase/firestore'
 import Card from '../components/shared/Card';
 import FormInput from '../components/shared/FormInput';
-import ProcessError from '../lib/Error';
 import { toast } from 'react-toastify';
+
+import '../styles/profile.css';
 
 type FormData = {
   name: string | undefined | null,
@@ -45,7 +46,7 @@ function Profile() {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
-      ...prev, [e.target.name]: [e.target.value]
+      ...prev, [e.target.name]: e.target.value
     }));
   }
 
@@ -73,7 +74,7 @@ function Profile() {
           </p>
         </div>
 
-        <Card>
+        <Card className='profile-card'>
             <form>
               <FormInput 
                 type="text" 

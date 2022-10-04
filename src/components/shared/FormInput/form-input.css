@@ -12,7 +12,7 @@
 }
 
 
-.form-input:focus, .form-input:hover {
+.form-input:focus {
     transition: all .5s ease-in-out;
     border: 1px solid #00cc66;
 }
@@ -20,6 +20,7 @@
 
 @media (min-width: 1100px) {
     .input,
+    .form-input,
     .password-input,
     .email-input,
     .name-input,

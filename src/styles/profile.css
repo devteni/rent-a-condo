@@ -1,0 +1,10 @@
+.profile-card {
+    width: auto;
+}
+
+/* Desktop screens */
+@media (min-width: 1024px) {
+    .profile-card{
+        width: 50rem;
+    }
+}
