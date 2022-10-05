@@ -7,6 +7,7 @@ import Button from '../../components/shared/Button';
 import Card from '../../components/shared/Card';
 import { toast } from 'react-toastify';
 import FormInput from '../../components/shared/FormInput';
+import OAuth from '../../components/auth/OAuth';
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -110,6 +111,8 @@ function SignUp() {
         </form>
         
         {/* Google OAuth */}
+        <OAuth />
+
         <Link to='/sign-in' className='register-link'>
           Sign In Instead
         </Link>  

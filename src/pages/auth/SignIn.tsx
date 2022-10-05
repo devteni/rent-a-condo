@@ -7,6 +7,7 @@ import Card from '../../components/shared/Card/';
 import Button from '../../components/shared/Button';
 import "../../styles/auth.css"
 import FormInput from '../../components/shared/FormInput';
+import OAuth from '../../components/auth/OAuth';
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -87,6 +88,8 @@ function SignIn() {
           </form>
 
           {/* Google OAuth */}
+          <OAuth />
+          
           <Link to='/sign-up' className='register-link'>
             Sign Up Instead
           </Link>
