@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation, useOutlet } from 'react-router-dom';
+import Spinner from '../components/shared/Spinner';
 import { useAuthStatus } from '../hooks/useAuthStatus';
 import { privateRoutes } from '../routes';
 
@@ -15,7 +16,7 @@ const Layout = () => {
   console.log(loggedIn, loading)
 
   if(loading) {
-    return <h3>Loading...</h3>
+    return <Spinner />
   }
 
   // if location.pathname in privateRoutes, and loggedIn == false, redirect to sign-in page
