@@ -392,7 +392,7 @@ button {
 }
 
 .explore-category-name {
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
 }
 
@@ -467,7 +467,7 @@ button {
   max-width: 275px;
 }
 
-.category-listing-infoText {
+.category-listing-infotext {
   font-weight: 500;
   font-size: 0.7rem;
 }
@@ -748,6 +748,11 @@ button {
 
 .flex {
   display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .formInput,

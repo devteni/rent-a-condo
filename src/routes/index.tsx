@@ -5,6 +5,7 @@ import SignIn from '../pages/auth/SignIn';
 import SignUp from '../pages/auth/SignUp';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import Profile from '../pages/Profile';
+import Category from '../pages/Category';
 
 
 const publicRoutes = [
@@ -23,6 +24,10 @@ const publicRoutes = [
     { 
         path: "/offers",
         element: <Offers />
+    },
+    { 
+        path: "/category/:name",
+        element: <Category />
     },
     { 
         path: "/forgot-password",
