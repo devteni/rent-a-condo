@@ -16,7 +16,9 @@ const Layout = () => {
   console.log(loggedIn, loading)
 
   if(loading) {
-    return <Spinner />
+    return <div className='page-container center-element'>
+        <Spinner />
+      </div>
   }
 
   // if location.pathname in privateRoutes, and loggedIn == false, redirect to sign-in page

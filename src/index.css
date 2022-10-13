@@ -7,6 +7,13 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+.center-element {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f2f4f8;
