@@ -6,6 +6,7 @@ import SignUp from '../pages/auth/SignUp';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import Profile from '../pages/Profile';
 import Category from '../pages/Category';
+import CreateListing from '../pages/CreateListing';
 
 
 const publicRoutes = [
@@ -39,7 +40,12 @@ const privateRoutes = [
     {
         path: "/profile",
         element: <Profile />
-    }
+    },
+    {
+        path: "/create-listing",
+        element: <CreateListing />
+    },
+
 ];
 
 export { privateRoutes, publicRoutes };

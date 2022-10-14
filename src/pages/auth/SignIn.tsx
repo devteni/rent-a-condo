@@ -44,55 +44,55 @@ function SignIn() {
     <>
       <Card className='auth'>
           <>
-          <section className='form-header'>
-             <span>Welcome back</span><br />
-             <small>Sign in to your account to continue</small>
-          </section>
+            <section className='form-header'>
+              <span>Welcome back</span><br />
+              <small>Sign in to your account to continue</small>
+            </section>
 
-          <form onSubmit={handleSubmit}>
-            <FormInput
-              type='email' 
-              name='email'
-              className='email-input'
-              placeholder='Email'
-              value={formData.email}
-              onChange={(e) => handleChange(e)}
-              />
-            
-            <div className="password-input-div">
-              <FormInput type={showPassword ? 'text' : 'password' }
-                className='password-input'
-                name='password'
-                placeholder='Password' 
-                value={formData.password}
+            <form onSubmit={handleSubmit}>
+              <FormInput
+                type='email' 
+                name='email'
+                className='email-input'
+                placeholder='Email'
+                value={formData.email}
                 onChange={(e) => handleChange(e)}
-              />
+                />
+              
+              <div className="password-input-div">
+                <FormInput type={showPassword ? 'text' : 'password' }
+                  className='password-input'
+                  name='password'
+                  placeholder='Password' 
+                  value={formData.password}
+                  onChange={(e) => handleChange(e)}
+                />
 
-              <span role='button' className='password-toggler' ref={passwordRef} onClick={() => {
-                if (passwordRef.current != null && passwordRef.current.innerText === 'Show') {
-                  passwordRef.current.innerText = 'Hide';
-                  setShowPassword(false);
-                }
-                else if (passwordRef.current != null) {
-                  passwordRef.current.innerText = 'Show';
-                  setShowPassword(true)
-                }
-                }}>
-                Show
-              </span> 
-            </div>
+                <span role='button' className='password-toggler' ref={passwordRef} onClick={() => {
+                  if (passwordRef.current != null && passwordRef.current.innerText === 'Show') {
+                    passwordRef.current.innerText = 'Hide';
+                    setShowPassword(false);
+                  }
+                  else if (passwordRef.current != null) {
+                    passwordRef.current.innerText = 'Show';
+                    setShowPassword(true)
+                  }
+                  }}>
+                  Show
+                </span> 
+              </div>
 
-            <Link to='/forgot-password' className='forgot-password-link'><small>Forgot Password? </small></Link>
+              <Link to='/forgot-password' className='forgot-password-link'><small>Forgot Password? </small></Link>
 
-            <Button className='signin-bar'>Sign In</Button>
-          </form>
+              <Button className='signin-bar'>Sign In</Button>
+            </form>
 
-          {/* Google OAuth */}
-          <OAuth />
+            {/* Google OAuth */}
+            <OAuth />
           
-          <Link to='/sign-up' className='register-link'>
-            Sign Up Instead
-          </Link>
+            <Link to='/sign-up' className='register-link'>
+              Sign Up Instead
+            </Link>
         </>
       </Card>
       

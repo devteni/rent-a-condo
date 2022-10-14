@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth, db } from '../lib/firebase';
 import { updateProfile } from 'firebase/auth';
 import { updateDoc, doc } from 'firebase/firestore'
 import Card from '../components/shared/Card';
 import FormInput from '../components/shared/FormInput';
 import { toast } from 'react-toastify';
+
+import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
+import homeIcon from "../assets/svg/homeIcon.svg";
+
 
 import '../styles/profile.css';
 
@@ -95,6 +99,12 @@ function Profile() {
                 />
             </form>
         </Card>
+
+        <Link to="/create-listing" className='create-listing'>
+          <img src={homeIcon} alt="home" />
+          <p>Sell or rent your home</p>
+          <img src={arrowRight} alt="arrow right" />
+        </Link>
       </main>
     </div>
   )
