@@ -1,11 +1,22 @@
-import { onAuthStateChanged } from 'firebase/auth'
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { onAuthStateChanged } from 'firebase/auth'
+import { 
+    getStorage, 
+    ref, 
+    uploadBytesResumable,
+    getDownloadURL 
+} from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4} from 'uuid';
+
 import Button from '../components/shared/Button'
 import FormInput from '../components/shared/FormInput'
 import TextArea from '../components/shared/FormInput/TextArea'
 import Spinner from '../components/shared/Spinner'
-import { auth } from '../lib/firebase'
+import { auth, db } from '../lib/firebase'
+import { toast } from 'react-toastify';
 
 type FormData = {
     type: string,
@@ -14,11 +25,11 @@ type FormData = {
     bathrooms: number,
     parking: boolean,
     furnished: boolean,
-    address: string,
+    address?: string,
     offer: boolean,
     regularPrice: number,
-    discountedPrice: number,
-    images: Object,
+    discountedPrice?: number,
+    images?: Array<Text>,
     latitude: number,
     longitude: number,
     userRef?: string
@@ -35,7 +46,7 @@ const formDataDefault = {
     offer: false,
     regularPrice: 0,
     discountedPrice: 0,
-    images: {},
+    images: [],
     latitude: 0,
     longitude: 0
 }
@@ -48,10 +59,92 @@ const CreateListing = () => {
     const navigate = useNavigate();
     const isMounted = useRef(true);
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const onSubmit = async (e: React.FormEvent) => {
         console.log(formData)
+        e.preventDefault();
 
+        setLoading(true);
+
+        if (formData.discountedPrice! >= formData.regularPrice) {
+            setLoading(false);
+            toast.error('Discounted price needs to be less than regular price');
+            return;
+        }
+
+
+        if (formData.images!.length > 6) {
+            setLoading(false);
+            toast.error('Max 6 images');
+            return;
+        }
+
+        // Store images in firebase
+        const storeImage = async (image:any) => {
+            return new Promise((resolve, reject) => {
+                const storage = getStorage();
+                const fileName = `${auth.currentUser?.uid}-${image.name}-${uuidv4()}`;
+                
+                const storageRef = ref(storage, 'images/' + fileName);
+
+                const uploadTask = uploadBytesResumable(storageRef, image);
+
+                uploadTask.on('state_changed', 
+                    (snapshot) => {
+                        // Observe state change events such as progress, pause, and resume
+                        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload is ' + progress + '% done');
+                        switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                        }
+                    }, 
+                    (error) => {
+                        reject(error)
+                    }, 
+                    () => {
+                        // Handle successful uploads on complete
+                        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                        getDownloadURL(uploadTask.snapshot.ref)
+                            .then((downloadURL) => {
+                                resolve(downloadURL);
+                                console.log('File available at', downloadURL);
+                        });
+                    }
+                    );
+
+            })
+        }
+
+        const imgUrls = await Promise.all(
+            [...formData.images!].map((image) => storeImage(image))
+        ).catch(() => {
+            setLoading(false);
+            toast.error('Images not uploaded');
+            return;
+        })
+
+        const formDataCopy = { 
+            ...formData,
+            imgUrls,
+            timestamp: serverTimestamp()
+        };
+
+        delete formDataCopy.images;
+        // location && (formDataCopy.location = location);
+
+        !formDataCopy.offer && delete formDataCopy.discountedPrice
+
+        const docRef = await addDoc(collection(db, 'listings'), formDataCopy);
+
+        setLoading(false);
+
+        toast.success('Listing saved');
+        navigate(`/category/${formDataCopy.type}/${docRef.id}`);
     }
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | any) => {
@@ -72,7 +165,6 @@ const CreateListing = () => {
         }
 
         if (!e.target.files) {
-            console.log(e.target.id, e.target.value)
             setFormData((prevState) => ({
                 ...prevState, [e.target.id]: boolean ?? e.target.value
               }))
@@ -227,7 +319,7 @@ const CreateListing = () => {
                     id='address'
                     className='form-input-address'
                     noDefaultClasses={true}
-                    value={formData.address}
+                    value={formData.address!}
                     onChange={onChange}
                 />
 
@@ -333,7 +425,7 @@ const CreateListing = () => {
                     required={true}
                 />
 
-                <Button type={'submit'} className='btn primary-btn m-2'>
+                <Button type={'submit'} className='btn btn-primary m-2'>
                     Create Listing
                 </Button>
 
