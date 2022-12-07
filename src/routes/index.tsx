@@ -7,6 +7,8 @@ import ForgotPassword from '../pages/auth/ForgotPassword';
 import Profile from '../pages/Profile';
 import Category from '../pages/Category';
 import CreateListing from '../pages/CreateListing';
+import Listing from '../pages/Listing';
+import Contact from '../pages/Contact';
 
 
 const publicRoutes = [
@@ -29,6 +31,14 @@ const publicRoutes = [
     { 
         path: "/category/:name",
         element: <Category />
+    },
+    { 
+        path: "/category/:name/:listingId",
+        element: <Listing />
+    },
+    { 
+        path: "/contact/:landlordId",
+        element: <Contact />
     },
     { 
         path: "/forgot-password",

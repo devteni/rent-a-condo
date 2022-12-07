@@ -16,11 +16,11 @@ html::-webkit-scrollbar {
 
 .btn {
   cursor: pointer;
-  border-radius: 1rem;
-  padding: 0.85rem 2rem;
+  border-radius: .5rem;
+  padding: 0.5rem 1rem;
   color: #ffffff;
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1rem;
   width: 80%;
   margin: 0 auto;
   display: flex;
@@ -28,7 +28,7 @@ html::-webkit-scrollbar {
   justify-content: center;
 }
 
-.primary-btn {
+.btn-primary {
   background: #00cc66;
 }
 
@@ -111,7 +111,7 @@ button {
 .listing-details,
 .category,
 .explore {
-  margin: 1rem;
+  margin: 1rem 1rem 10rem 1rem;
 }
 @media (min-width: 1024px) {
   .page-container,
@@ -121,6 +121,20 @@ button {
   .category,
   .explore {
     margin: 3rem;
+  }
+
+  .btn {
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: 0.85rem 2rem;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.25rem;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -167,7 +181,7 @@ button {
   right: 0;
   height: 85px;
   background-color: #ffffff;
-  z-index: 1000;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -410,6 +424,11 @@ button {
 .explore-category-name {
   font-weight: 600;
   text-align: left;
+  width: 8em;
+}
+
+.explore-category-name:hover{
+  border-bottom: solid #00cc66 2px;
 }
 
 .category {
@@ -502,10 +521,6 @@ button {
   margin-top: 2rem;
 }
 
-.listing-details {
-  margin-bottom: 10rem;
-}
-
 .share-icon {
   cursor: pointer;
   position: fixed;
@@ -532,7 +547,7 @@ button {
   font-weight: 600;
 }
 
-.discountPrice {
+.discount-price {
   padding: 0.25rem 0.5rem;
   background-color: #000000;
   color: #ffffff;
@@ -542,7 +557,7 @@ button {
   display: inline;
 }
 
-.listingType {
+.listing-type {
   padding: 0.25rem 0.5rem;
   background-color: #00cc66;
   color: #ffffff;
@@ -553,35 +568,35 @@ button {
   margin-right: 1rem;
 }
 
-.listingDetailsList {
+.listing-details-list {
   padding: 0;
   list-style-type: none;
 }
-.listingDetailsList li {
+.listing-details-list li {
   margin: 0.3rem 0;
   font-weight: 500;
   opacity: 0.8;
 }
 
-.listingLocationTitle {
+.listing-location-title {
   margin-top: 2rem;
   font-weight: 600;
   font-size: 1.25rem;
 }
 
-.leafletContainer {
+.leaflet-container {
   width: 100%;
   height: 200px;
   overflow-x: hidden;
   margin-bottom: 3rem;
 }
 @media (min-width: 1024px) {
-  .leafletContainer {
+  .leaflet-container {
     height: 400px;
   }
 }
 
-.linkCopied {
+.link-copied {
   position: fixed;
   top: 9%;
   right: 5%;
@@ -592,40 +607,40 @@ button {
   font-weight: 600;
 }
 
-.contactListingName {
+.contact-listingName {
   margin-top: -1rem;
   margin-bottom: 0;
   font-weight: 600;
 }
 
-.contactListingLocation {
+.contact-listing-location {
   margin-top: 0.25rem;
   font-weight: 600;
 }
 
-.contactLandlord {
+.contact-landlord {
   margin-top: 2rem;
   display: flex;
   align-items: center;
 }
 
-.landlordName {
+.landlord-name {
   font-weight: 600;
   font-size: 1.2rem;
 }
 
-.messageForm {
+.message-form {
   margin-top: 0.5rem;
 }
 
-.messageDiv {
+.message-div {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 4rem;
 }
 
-.messageLabel {
+.message-label {
   margin-bottom: 0.5rem;
 }
 
@@ -633,13 +648,13 @@ button {
   margin-bottom: 10rem;
 }
 
-.profileHeader {
+.profile-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.logOut {
+.logout {
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
@@ -650,23 +665,23 @@ button {
   border-radius: .5rem;
 }
 
-.profileDetailsHeader {
+.profile-details-header {
   display: flex;
   justify-content: space-between;
   max-width: 500px;
 }
 
-.personalDetailsText {
+.personal-details-text {
   font-weight: 600;
 }
 
-.changePersonalDetails {
+.change-personal-details {
   cursor: pointer;
   font-weight: 600;
   color: #00cc66;
 }
 
-.profileCard {
+.profile-card {
   background-color: #ffffff;
   border-radius: 1rem;
   padding: 1rem;
@@ -674,41 +689,41 @@ button {
   max-width: 500px;
 }
 
-.profileDetails {
+.profile-details {
   display: flex;
   flex-direction: column;
 }
 
-.profileName,
-.profileEmail,
-.profileAddress,
-.profileAddressActive,
-.profileEmailActive,
-.profileNameActive {
+.profile-name,
+.profile-email,
+.profile-address,
+.profile-address-active,
+.profile-email-active,
+.profile-name-active {
   all: unset;
   margin: 0.3rem 0;
   font-weight: 600;
   width: 100%;
 }
-.profileNameActive {
+.profile-name-active {
   background-color: rgba(44, 44, 44, 0.1);
 }
 
-.profileEmail,
-.profileAddress,
-.profileAddressActive,
-.profileEmailActive {
+.profile-email,
+.profile-address,
+.profile-address-active,
+.profile-email-active {
   font-weight: 500;
 }
-.profileEmailActive {
+.profile-email-active {
   background-color: rgba(44, 44, 44, 0.1);
 }
 
-.profileAddressActive {
+.profile-address-active {
   background-color: rgba(44, 44, 44, 0.1);
 }
 
-.createListing {
+.create-listing {
   background-color: #ffffff;
   border-radius: 1rem;
   padding: 0.25rem 1rem;

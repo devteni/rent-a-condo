@@ -11,7 +11,7 @@ type Props = {
     listing: { 
         name: string, 
         type: string, 
-        imageUrls: Array<string>,
+        imgUrls: Array<string>,
         location: string,
         price: string | number,
         discountedPrice: string | number,
@@ -27,7 +27,7 @@ const ListingItem: React.FC<Props> = ({ listing, id, onDelete}) => {
   return (
     <li className='category-listing'>
         <Link to={`/category/${listing.type}/${id}`} className="category-listing-link">
-            <img src={listing.imageUrls[0]} alt={listing.name} className='category-listing-img'/>
+            <img src={listing.imgUrls[0]} alt={listing.name} className='category-listing-img'/>
         </Link>
         <div className='category-listing-details'>
             <p className='category-listing-location'>{listing.location}</p>
