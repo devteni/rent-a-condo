@@ -66,7 +66,7 @@ function SignUp() {
           <form onSubmit={handleSubmit}>
             <FormInput
               type='text' 
-              className='name-input'
+              className='form-input name-input'
               placeholder='Name'
               name='name'
               value={formData.name}
@@ -75,7 +75,7 @@ function SignUp() {
 
             <FormInput
               type='email' 
-              className='email-input'
+              className='form-input email-input'
               placeholder='Email'
               name='email'
               value={formData.email}
@@ -84,7 +84,7 @@ function SignUp() {
             
             <div className="password-input-div">
               <FormInput type={showPassword ? 'text' : 'password' }
-                className='password-input'
+                className='form-input password-input'
                 placeholder='Password' 
                 name='password'
                 value={formData.password}

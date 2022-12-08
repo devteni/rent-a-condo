@@ -53,7 +53,7 @@ function SignIn() {
               <FormInput
                 type='email' 
                 name='email'
-                className='email-input'
+                className='form-input email-input'
                 placeholder='Email'
                 value={formData.email}
                 onChange={(e) => handleChange(e)}
@@ -61,7 +61,7 @@ function SignIn() {
               
               <div className="password-input-div">
                 <FormInput type={showPassword ? 'text' : 'password' }
-                  className='password-input'
+                  className='form-input password-input'
                   name='password'
                   placeholder='Password' 
                   value={formData.password}
