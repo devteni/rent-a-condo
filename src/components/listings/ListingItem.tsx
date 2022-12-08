@@ -20,7 +20,7 @@ type Props = {
         bedrooms: number,
         bathrooms: number
     },
-    onDelete?: (id: string|number, name: string) => void,
+    onDelete?: (id: string|number, name?: string) => void,
 }
 
 const ListingItem: React.FC<Props> = ({ listing, id, onDelete}) => {
