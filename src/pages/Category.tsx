@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore'
+import { collection, getDocs, query, where, orderBy, limit, startAfter, QueryDocumentSnapshot, DocumentData } from 'firebase/firestore'
 import { useParams } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { toast } from 'react-toastify';
@@ -15,6 +15,9 @@ type Listing = {
 const Category = () => {
     const [listings, setListings] = useState<Listing[]>([]);
     const [loading, setLoading] = useState(true);
+    const [lastFetchedListing, setLastFetchedListing] = useState<QueryDocumentSnapshot<DocumentData>>();
+    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [totalListings, setTotalListings] = useState(0);
 
     const params = useParams();
 
@@ -36,6 +39,13 @@ const Category = () => {
             
             // Execute query
             const querySnap = await getDocs(q);
+
+            if(querySnap.docs.length > itemsPerPage) {
+                console.log(querySnap.docs.length);
+                const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+                setLastFetchedListing(lastVisible);
+            }
+
             const listings: Listing[] = [];
             querySnap.forEach((doc) => {
                 console.log(doc.data())
@@ -53,7 +63,46 @@ const Category = () => {
       }
       fetchListings()
 
-    }, [])
+    }, [params.name])
+
+    // Paginations/Load more listings
+    const loadMoreListing = async () => {
+        try {
+            // Get reference 
+            const listingsRef = collection(db, 'listings');
+
+            // Create a query
+            const q = query(listingsRef, where
+                        ('type', '==', params.name), 
+                        orderBy('timestamp', 'desc'), 
+                        startAfter(lastFetchedListing),
+                        limit(itemsPerPage));
+            
+            // Execute query
+            const querySnap = await getDocs(q);
+            
+            if(querySnap.docs.length > itemsPerPage) {
+                console.log(querySnap.docs.length);
+                const lastVisible = querySnap.docs[querySnap.docs.length - 1];
+                setLastFetchedListing(lastVisible);
+            }
+
+
+            const listings: any = [];
+            querySnap.forEach((doc) => {
+                console.log(doc.data())
+                return listings.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            });
+
+            setListings((prev) => ([...prev, listings]));
+            setLoading(false);
+        } catch(error) {
+            toast.error('Could not fetch listings');
+        }
+      }
     
   return (
     <div className='category'>
@@ -68,11 +117,21 @@ const Category = () => {
             <>
                 <main>
                     <ul className='category-listings'>
-                        {listings.map((listing) => (
-                            <ListingItem listing={listing.data} id={listing.id} onDelete={onDelete}/>
+                        {listings.map((listing, idx) => (
+                            <ListingItem key={idx} listing={listing.data} id={listing.id} onDelete={onDelete}/>
                         ))}
                     </ul>
                 </main>
+                <br />
+                <br />
+
+                {/* USE TOTAL LISTING COUNT TO DETERMINE PAGINATION */}
+                {console.log(lastFetchedListing?.data())}
+                { lastFetchedListing?.data() && 
+                    <p className='load-more' onClick={loadMoreListing}>
+                        Load more
+                    </p>
+                }
             </> : <p>No listings for {params.name}</p>
         }
     </div>
