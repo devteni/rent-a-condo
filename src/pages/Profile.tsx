@@ -47,7 +47,7 @@ function Profile() {
         await updateDoc(userRef, { name });
       }
     } catch (error: unknown) {
-      console.log(error)
+      //console.log(error)
       toast.error('Could not update profile details');
     }
   }
@@ -89,6 +89,10 @@ function Profile() {
       setListings(updatedListings);
       toast.success('Successfully deleted listing');
     }
+  }
+
+  const onEdit = async (listingId: any) => {
+    navigate(`/edit-listing/${listingId}`);
   }
 
   return (
@@ -149,11 +153,17 @@ function Profile() {
               <p className="listing-text">
                 Your Listings
               </p>
-              <ul>
+              <div>
                 { listings?.map((listing: any, idx: number) => (
-                  <ListingItem key={idx} id={listing.id} listing={listing.data} onDelete={onDelete} />
+                  <ListingItem 
+                    key={idx} 
+                    id={listing.id} 
+                    listing={listing.data} 
+                    onDelete={onDelete} 
+                    onEdit={onEdit}
+                    />
                 ))}
-              </ul>
+              </div>
             </>
           )
         }

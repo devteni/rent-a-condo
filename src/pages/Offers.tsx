@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore'
-import { useParams } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { toast } from 'react-toastify';
 import Spinner from '../components/shared/Spinner';
@@ -34,7 +33,7 @@ const Offers = () => {
             const querySnap = await getDocs(q);
             const listings: Listing[] = [];
             querySnap.forEach((doc) => {
-                console.log(doc.data())
+                //console.log(doc.data())
                 return listings.push({
                     id: doc.id,
                     data: doc.data()

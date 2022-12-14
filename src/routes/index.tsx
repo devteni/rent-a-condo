@@ -1,4 +1,4 @@
-import React, { LazyExoticComponent, ReactNode } from 'react';
+import React from 'react';
 import Explore from '../pages/Explore';
 import Offers from '../pages/Offers';
 import SignIn from '../pages/auth/SignIn';
@@ -9,6 +9,7 @@ import Category from '../pages/Category';
 import CreateListing from '../pages/CreateListing';
 import Listing from '../pages/Listing';
 import Contact from '../pages/Contact';
+import EditListing from '../pages/EditListing';
 
 
 const publicRoutes = [
@@ -54,6 +55,10 @@ const privateRoutes = [
     {
         path: "/create-listing",
         element: <CreateListing />
+    },
+    {
+        path: "/edit-listing/:listingId",
+        element: <EditListing />
     },
 
 ];

@@ -91,14 +91,14 @@ button {
 
 
 
-.removeIcon {
+.remove-icon {
   cursor: pointer;
   position: absolute;
   top: -3%;
   right: -2%;
 }
 
-.editIcon {
+.edit-icon {
   cursor: pointer;
   position: absolute;
   top: -3.4%;

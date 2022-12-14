@@ -12,7 +12,7 @@ export const useAuthStatus = () => {
         if(isMounted) {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    console.log(user)
+                    //console.log(user)
                     setLoggedIn(true);
                 }
 

@@ -41,14 +41,14 @@ const Category = () => {
             const querySnap = await getDocs(q);
 
             if(querySnap.docs.length > itemsPerPage) {
-                console.log(querySnap.docs.length);
+                //console.log(querySnap.docs.length);
                 const lastVisible = querySnap.docs[querySnap.docs.length - 1];
                 setLastFetchedListing(lastVisible);
             }
 
             const listings: Listing[] = [];
             querySnap.forEach((doc) => {
-                console.log(doc.data())
+                //console.log(doc.data())
                 return listings.push({
                     id: doc.id,
                     data: doc.data()
@@ -82,7 +82,7 @@ const Category = () => {
             const querySnap = await getDocs(q);
             
             if(querySnap.docs.length > itemsPerPage) {
-                console.log(querySnap.docs.length);
+                //console.log(querySnap.docs.length);
                 const lastVisible = querySnap.docs[querySnap.docs.length - 1];
                 setLastFetchedListing(lastVisible);
             }
@@ -90,7 +90,7 @@ const Category = () => {
 
             const listings: any = [];
             querySnap.forEach((doc) => {
-                console.log(doc.data())
+                //console.log(doc.data())
                 return listings.push({
                     id: doc.id,
                     data: doc.data()
@@ -118,15 +118,18 @@ const Category = () => {
                 <main>
                     <ul className='category-listings'>
                         {listings.map((listing, idx) => (
-                            <ListingItem key={idx} listing={listing.data} id={listing.id} onDelete={onDelete}/>
+                            <ListingItem 
+                                key={idx} 
+                                listing={listing.data} 
+                                id={listing.id} 
+                                onDelete={onDelete}
+                                />
                         ))}
                     </ul>
                 </main>
                 <br />
                 <br />
 
-                {/* USE TOTAL LISTING COUNT TO DETERMINE PAGINATION */}
-                {console.log(lastFetchedListing?.data())}
                 { lastFetchedListing?.data() && 
                     <p className='load-more' onClick={loadMoreListing}>
                         Load more

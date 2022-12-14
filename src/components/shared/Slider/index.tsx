@@ -44,13 +44,17 @@ const Slider = () => {
     }
 
 
+    if (listings?.length === 0) {
+        return <></>
+    }
+
     return listings! && (
         <div>
             <p className="explore-heading">Recommended</p>
             
             <Swiper slidesPerView={1} pagination={{clickable: true}}>
                 { listings.map((listing, idx) => {
-                    console.log(listing.data().imgUrls[0])
+                    //console.log(listing.data().imgUrls[0])
 
                     return <SwiperSlide key={idx} onClick={() => navigate(`/category/${listing.data().type!}/${listing.id}`)}>
                             <div 
