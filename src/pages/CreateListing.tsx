@@ -66,6 +66,7 @@ const CreateListing = () => {
         setLoading(true);
 
         if (formData.discountedPrice! >= formData.regularPrice) {
+            console.log(formData.discountedPrice! >= formData.regularPrice)
             setLoading(false);
             toast.error('Discounted price needs to be less than regular price');
             return;
@@ -165,9 +166,15 @@ const CreateListing = () => {
         }
 
         if (!e.target.files) {
-            setFormData((prevState) => ({
-                ...prevState, [e.target.id]: boolean ?? e.target.value
-              }))
+            if (e.target.type === "number") {
+                setFormData((prevState) => ({
+                    ...prevState, [e.target.id]: boolean ?? parseInt(e.target.value)
+                  }))
+            } else {
+                setFormData((prevState) => ({
+                    ...prevState, [e.target.id]: boolean ?? e.target.value
+                }))
+            }
         }
         return;
     }
